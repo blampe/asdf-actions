@@ -1241,15 +1241,19 @@ async function setupAsdf() {
   core.addPath(`${asdfDir}/shims`);
   core.info(`Cloning asdf into ASDF_DIR: ${asdfDir}`);
   const branch = core.getInput("asdf_branch", {required: true});
-  await exec.exec("git", [
-    "clone",
-    "--depth",
-    "1",
-    "--branch",
-    branch,
-    "https://github.com/asdf-vm/asdf.git",
-    asdfDir
-  ]);
+  try {
+    await exec.exec("git", [
+      "clone",
+      "--depth",
+      "1",
+      "--branch",
+      branch,
+      "https://github.com/asdf-vm/asdf.git",
+      asdfDir
+    ]);
+  } catch (error) {
+
+  }
 }
 
 // lib/plugins-add/index.ts
